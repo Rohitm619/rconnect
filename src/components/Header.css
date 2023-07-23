@@ -1,0 +1,15 @@
+.searchBox {
+  font-family: "PT Sans", sans-serif;
+}
+
+.links a {
+  background-color: white;
+}
+
+.btn-primary {
+  transition: display linear 1s;
+}
+
+.btn-primary:hover span {
+  display: inline;
+}

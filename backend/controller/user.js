@@ -1,5 +1,9 @@
 import User from "../model/User";
 import bcrypt from "bcryptjs";
+import Jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const getAllUser = async (req, res, next) => {
   let users;
@@ -75,7 +79,18 @@ export const signIn = async (req, res, next) => {
   } else {
     let isValidPassword = bcrypt.compareSync(password, existingUser.password);
     if (isValidPassword) {
-      return res.status(201).json({ message: "Login Successful!" });
+      Jwt.sign(
+        { existingUser },
+        process.env.JWT_SECRET_Key,
+        { expiresIn: "5m" },
+        (err, token) => {
+          if (err) {
+            console.log(err);
+            return res.status(400).json({ message: "Something went wrong!" });
+          }
+          return res.status(201).json({ message: "Login Successful!", token });
+        }
+      );
     } else {
       return res.status(400).json({ message: "Invalid Credentials!" });
     }
@@ -91,6 +106,11 @@ export const getUser = async (req, res, next) => {
     console.log(err);
     return res.status(404).json({ message: "Couldn't find the user" });
   }
+  return res.status(200).json({ user });
+};
+
+export const myProfile = async (req, res, next) => {
+  let user = req.user.existingUser;
   return res.status(200).json({ user });
 };
 
