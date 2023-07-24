@@ -61,12 +61,23 @@ function Header() {
           <div className="lg:hidden flex justify-center">
             <motion.img
               whileHover={{ scale: 1.1 }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, rotate: 360 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+              }}
               src="/rohit.jpg"
               className="h-9 cursor-pointer border border-[#CBE4DE] overflow-hidden rounded-full"
               alt=""
             />
           </div>
-          <div className="hidden lg:flex sm:float-right gap-2 items-center">
+          <motion.div
+            initial={{ scale: 1.5 }}
+            animate={{ scale: 1 }}
+            className="hidden lg:flex sm:float-right gap-2 items-center"
+          >
             <div className="flex float-right gap-2">{menu}</div>
             <div className="border border-[#CBE4DE] overflow-hidden rounded-full">
               <motion.img
@@ -76,12 +87,16 @@ function Header() {
                 alt=""
               />
             </div>
-          </div>
+          </motion.div>
         </div>
         {/* menu for phones */}
-        <div className="lg:hidden col-span-5 flex justify-center mt-3 gap-2">
+        <motion.div
+          initial={{ scale: 1.5 }}
+          animate={{ scale: 1 }}
+          className="lg:hidden col-span-5 flex justify-center mt-3 gap-2"
+        >
           {menu}
-        </div>
+        </motion.div>
       </nav>
       <hr className="text-white mt-3 lg:hidden" />
     </>
