@@ -2,6 +2,8 @@ import "./Header.css";
 import { motion } from "framer-motion";
 
 function Header() {
+  const userName = "Rohit";
+
   // menu variable
   const menu = (
     <>
@@ -79,13 +81,14 @@ function Header() {
             className="hidden lg:flex sm:float-right gap-2 items-center"
           >
             <div className="flex float-right gap-2">{menu}</div>
-            <div className="border border-[#CBE4DE] overflow-hidden rounded-full">
+            <div className="group flex overflow-hidden rounded-full items-center glass justify-center cursor-pointer">
               <motion.img
                 whileHover={{ scale: 1.1 }}
                 src="/rohit.jpg"
-                className="h-9 rounded-full cursor-pointer"
+                className="h-9 rounded-full"
                 alt=""
               />
+              <span className="text-white mx-2">Hi, {userName}</span>
             </div>
           </motion.div>
         </div>
